@@ -409,10 +409,10 @@ body {
   z-index: 1;
 }
 
-/* Responsive */
+/* Responsive - Tablet */
 @media (max-width: 768px) {
   .header {
-    padding: 40px 20px 30px;
+    padding: 40px 16px 30px;
   }
 
   .logo h1 {
@@ -424,21 +424,36 @@ body {
   }
 
   .tagline {
-    font-size: 1rem;
+    font-size: 0.95rem;
+    padding: 0 10px;
+  }
+
+  .main-content {
+    flex-direction: column;
+    padding: 16px;
+    gap: 20px;
   }
 
   .content-card {
+    max-width: 100%;
     padding: 24px;
     border-radius: 20px;
   }
 
+  .histCard {
+    height: auto;
+    max-height: 60vh;
+  }
+
   .preference-input {
     padding: 14px 16px;
+    font-size: 1rem;
   }
 
   .submit-btn {
     padding: 14px 24px;
     font-size: 1rem;
+    width: 100%;
   }
 
   .movie-header {
@@ -448,5 +463,137 @@ body {
 
   .movie-year {
     align-self: flex-start;
+  }
+
+  .movie-card {
+    padding: 20px;
+  }
+
+  .results-title {
+    font-size: 1.3rem;
+  }
+}
+
+/* Responsive - Mobile Phones */
+@media (max-width: 480px) {
+  .header {
+    padding: 30px 12px 20px;
+  }
+
+  .logo {
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .logo h1 {
+    font-size: 1.6rem;
+  }
+
+  .logo-icon {
+    font-size: 1.6rem;
+  }
+
+  .tagline {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .main-content {
+    padding: 12px;
+    gap: 16px;
+  }
+
+  .content-card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .histCard {
+    max-height: 50vh;
+    padding: 6px;
+  }
+
+  .input-label {
+    font-size: 1rem;
+  }
+
+  .preference-input {
+    padding: 12px 14px;
+    font-size: 0.95rem;
+    border-radius: 12px;
+  }
+
+  .submit-btn {
+    padding: 12px 20px;
+    font-size: 0.95rem;
+    border-radius: 12px;
+  }
+
+  .movie-list {
+    margin-top: 24px;
+    padding-top: 24px;
+  }
+
+  .results-title {
+    font-size: 1.1rem;
+    gap: 8px;
+  }
+
+  .title-icon {
+    font-size: 1.4rem;
+  }
+
+  .movie-card {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .movie-title {
+    font-size: 1.1rem;
+  }
+
+  .movie-description {
+    font-size: 0.9rem;
+  }
+
+  .genre-tag {
+    font-size: 0.75rem;
+    padding: 3px 10px;
+  }
+
+  .movie-year {
+    font-size: 0.8rem;
+    padding: 3px 10px;
+  }
+
+  .error-message {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+
+  .footer {
+    padding: 20px 12px;
+    font-size: 0.85rem;
+  }
+
+  /* Reduce animation intensity for performance */
+  .gradient-orb {
+    opacity: 0.2;
+  }
+
+  .orb-1 {
+    width: 300px;
+    height: 300px;
+  }
+
+  .orb-2 {
+    width: 200px;
+    height: 200px;
+  }
+
+  .orb-3 {
+    width: 150px;
+    height: 150px;
   }
 }
