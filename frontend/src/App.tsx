@@ -100,7 +100,14 @@ function App() {
       </main>
 
       <footer className="footer">
-        <p>Made with ❤️ For Aceluid</p>
+        <p>Made with ❤️ For Acelucid</p>
+        <div className="footer-contact">
+          <p className="dev-name">Developed by <strong>Ankit Bhandari</strong></p>
+          <p className="contact-info">
+            📞 <a href="tel:+916397098909">6397098909</a> |
+            ✉️ <a href="mailto:bhandarii1398@gmail.com">bhandarii1398@gmail.com</a>
+          </p>
+        </div>
       </footer>
     </div>
   );
