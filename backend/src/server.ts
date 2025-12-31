@@ -6,16 +6,13 @@ import recommendationsRoutes from "./routes/recommendations";
 
 const fastify = Fastify({ logger: true });
 
-// Register CORS
 fastify.register(cors, {
   origin: true,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
 });
 
-// Register routes
 fastify.register(recommendationsRoutes);
 
-// Health check endpoint
 fastify.get("/health", async () => {
   return {
     status: "ok",
@@ -23,10 +20,8 @@ fastify.get("/health", async () => {
   };
 });
 
-// Start server
 const start = async (): Promise<void> => {
   try {
-    // Initialize database before starting
     await initDatabase();
     console.log("Database initialized");
 

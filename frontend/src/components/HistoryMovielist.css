@@ -228,7 +228,6 @@
   transition: all 0.3s ease;
 }
 
-/* List View Mode */
 .history-movies-grid.list-view {
   grid-template-columns: 1fr;
   gap: 10px;
@@ -313,7 +312,6 @@
   color: var(--accent-secondary);
 }
 
-/* Responsive - Tablet */
 @media (max-width: 768px) {
   .history-header {
     flex-direction: column;
@@ -338,7 +336,6 @@
   }
 }
 
-/* Responsive - Mobile Phones */
 @media (max-width: 480px) {
   .history-header {
     margin-bottom: 16px;
