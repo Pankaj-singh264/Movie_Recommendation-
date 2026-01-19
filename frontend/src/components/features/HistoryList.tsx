@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PreviousRecommendationResponse } from '../../types';
+import type { PreviousRecommendationResponse } from '../../types';
 import Button from '../common/Button';
 import GlassCard from '../common/GlassCard';
 import './HistoryList.css';

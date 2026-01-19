@@ -1,4 +1,4 @@
-import {
+import type {
   RecommendationResponse,
   PreviousRecommendationResponse,
 } from "../types";

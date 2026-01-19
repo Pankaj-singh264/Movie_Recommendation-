@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { api } from './services/api';
-import { Movie, PreviousRecommendationResponse } from './types';
+import type { Movie, PreviousRecommendationResponse } from './types';
 import PromptBar from './components/features/PromptBar';
 import MovieCard from './components/features/MovieCard';
 import HistoryList from './components/features/HistoryList';

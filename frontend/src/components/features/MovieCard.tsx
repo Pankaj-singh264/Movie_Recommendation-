@@ -1,5 +1,5 @@
 import React from 'react';
-import { Movie } from '../../types';
+import type { Movie } from '../../types';
 import GlassCard from '../common/GlassCard';
 import './MovieCard.css';
 
