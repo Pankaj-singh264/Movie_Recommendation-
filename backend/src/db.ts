@@ -3,7 +3,11 @@ import fs from "fs";
 import path from "path";
 
 let db: Database | null = null;
-const dbPath = path.join(__dirname, "..", "movies.db");
+// Use /tmp for writable storage on Render (ephemeral), or local folder for development
+const dbPath =
+  process.env.NODE_ENV === "production"
+    ? "/tmp/movies.db"
+    : path.join(process.cwd(), "movies.db");
 
 export interface Recommendation {
   id: number;

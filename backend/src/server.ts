@@ -20,6 +20,14 @@ fastify.get("/health", async () => {
   };
 });
 
+// Render health check endpoint
+fastify.get("/healthz", async () => {
+  return {
+    status: "ok",
+    timestamp: new Date().toISOString(),
+  };
+});
+
 const start = async (): Promise<void> => {
   try {
     await initDatabase();
