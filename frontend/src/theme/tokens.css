@@ -1,0 +1,51 @@
+:root {
+  /* Colors - Cinematic Premium Palette */
+  --color-bg-main: #0b0b0c;
+  --color-bg-secondary: #16161a;
+  --color-bg-card: rgba(30, 30, 35, 0.6);
+  --color-bg-card-hover: rgba(40, 40, 50, 0.8);
+
+  --color-primary: #6c5dd3; /* Vibrant Violet */
+  --color-primary-glow: rgba(108, 93, 211, 0.5);
+  --color-secondary: #00d4ff; /* Electric Teal */
+  --color-accent-pink: #ff2e93;
+  --color-accent-gold: #ffd700;
+
+  --color-text-main: #ffffff;
+  --color-text-muted: #a0a0b0;
+  --color-border: rgba(255, 255, 255, 0.1);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 100%
+  );
+  --gradient-dark-overlay: linear-gradient(
+    to bottom,
+    rgba(11, 11, 12, 0) 0%,
+    rgba(11, 11, 12, 0.9) 100%
+  );
+
+  /* Typography */
+  --font-heading: "Outfit", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* Components */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 20px var(--color-primary-glow);
+}

@@ -1,140 +1,117 @@
 # CineMatch AI - Movie Recommendation App
 
-A full-stack web application that recommends movies based on user preferences using Google Gemini AI.
+A full-stack web application that leverages Google's Gemini AI to provide personalized movie recommendations based on user preferences.
 
-## Tech Stack
+## 🚀 Features
 
-- **Frontend**: React + TypeScript + Vite
-- **Backend**: Node.js + Fastify + TypeScript
-- **Database**: SQLite
-- **AI**: Google Gemini API
+- **AI-Powered Recommendations**: Uses Google Gemini AI to understand natural language preferences.
+- **Modern UI**: Built with React and styled for a premium user experience.
+- **History Tracking**: Keeps a local record of your requested recommendations.
+- **Fast Performance**: Powered by Vite and Fastify.
 
-## Prerequisites
+## 🛠️ Tech Stack
 
-- Node.js 18+
-- A Google Gemini API key ([Get one here](https://makersuite.google.com/app/apikey))
+- **Frontend**: React, TypeScript, Vite
+- **Backend**: Node.js, Fastify, TypeScript
+- **AI Engine**: Google Gemini API
+- **Database**: SQLite (via `sql.js`)
 
-## Setup Instructions
+## 📋 Prerequisites
+
+- Node.js (v18 or higher)
+- npm
+- A Google Gemini API Key ([Get it here](https://makersuite.google.com/app/apikey))
+
+## ⚙️ Installation & Setup
 
 ### 1. Backend Setup
 
-```bash
-cd backend
+The backend handles API requests and communicates with the Gemini AI service.
 
-# Install dependencies
-npm install
+1.  Navigate to the backend directory:
 
-# Create .env file
-cp .env.example .env
+    ```bash
+    cd backend
+    ```
 
-# Add your Gemini API key to .env
-# GEMINI_API_KEY=your_api_key_here
+2.  Install dependencies:
 
-# Start development server
-npm run dev
-```
+    ```bash
+    npm install
+    ```
 
-The backend will run on `http://localhost:3001`
+3.  Configure Environment Variables:
+    - Create a `.env` file in the `backend` directory.
+    - Add your Gemini API key:
+      ```env
+      GEMINI_API_KEY=your_actual_api_key_here
+      ```
+
+4.  Start the backend server:
+    ```bash
+    npm run dev
+    ```
+    The server will start at `http://localhost:3001`.
 
 ### 2. Frontend Setup
 
-```bash
-cd frontend
+The frontend provides the user interface for interacting with the application.
 
-# Install dependencies (if not already done)
-npm install
+1.  Open a new terminal and navigate to the frontend directory:
 
-# Start development server
-npm run dev
-```
+    ```bash
+    cd frontend
+    ```
 
-The frontend will run on `http://localhost:5173`
+2.  Install dependencies:
 
-## API Endpoints
+    ```bash
+    npm install
+    ```
 
-### POST /api/recommend
+3.  Start the frontend development server:
+    ```bash
+    npm run dev
+    ```
+    The application will be accessible at `http://localhost:5173`.
 
-Get movie recommendations based on user preference.
-
-**Request:**
-
-```json
-{
-  "preference": "action movies with a strong female lead"
-}
-```
-
-**Response:**
-
-```json
-{
-  "id": 1,
-  "movies": [
-    {
-      "title": "Wonder Woman",
-      "year": 2017,
-      "genre": "Action, Adventure",
-      "description": "An Amazon princess leaves her island..."
-    }
-  ]
-}
-```
-
-### GET /api/recommendations
-
-Get all past recommendations.
-
-### GET /health
-
-Health check endpoint.
-
-## Database Schema
-
-```sql
-CREATE TABLE recommendations (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  user_input TEXT NOT NULL,
-  recommended_movies TEXT NOT NULL,
-  timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-);
-```
-
-## Deployment
-
-### Backend (Render)
-
-1. Create a new Web Service on Render
-2. Connect your GitHub repository
-3. Set build command: `npm install && npm run build`
-4. Set start command: `npm start`
-5. Add environment variable: `GEMINI_API_KEY`
-
-### Frontend (Vercel)
-
-1. Import your repository on Vercel
-2. Set root directory to `frontend`
-3. Add environment variable: `VITE_API_URL=your-backend-url`
-4. Deploy
-
-## Project Structure
+## 📂 Project Structure
 
 ```
-aceluid/
-├── backend/
+Movie_Recommendation/
+├── backend/            # Backend server code
 │   ├── src/
-│   │   ├── server.ts
-│   │   ├── db.ts
-│   │   └── routes/recommendations.ts
+│   │   ├── server.ts   # Entry point
+│   │   └── ...
 │   ├── package.json
-│   └── tsconfig.json
-├── frontend/
+│   └── .env            # API keys (create this)
+├── frontend/           # Frontend React application
 │   ├── src/
-│   │   ├── App.tsx
-│   │   ├── App.css
-│   │   ├── types.ts
-│   │   └── components/
-│   │       ├── PreferenceForm.tsx
-│   │       └── MovieList.tsx
+│   │   ├── App.tsx     # Main component
+│   │   └── ...
 │   └── package.json
-└── README.md
+├── .gitignore          # Git ignore rules
+└── README.md           # Project documentation
 ```
+
+## 🔌 API Endpoints
+
+### `POST /api/recommend`
+
+Generates movie recommendations.
+
+**Request Body:**
+
+```json
+{
+  "preference": "I want to watch a sci-fi movie about time travel"
+}
+```
+
+### `GET /api/recommendations`
+
+Retrieves the history of recommendations.
+
+### `GET /health`
+
+Checks if the server is running.

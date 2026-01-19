@@ -14,3 +14,4 @@ export interface PreviousRecommendationResponse {
   user_input: string;
   recommended_movies: Movie[];
 }
+// Export types for API usage

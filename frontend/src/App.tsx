@@ -1,57 +1,39 @@
 import { useEffect, useState } from 'react';
-import PreferenceForm from './components/PreferenceForm';
-import MovieList from './components/MovieList';
-import HistoryMovielist from './components/HistoryMovielist';
-import type { Movie, PreviousRecommendationResponse, RecommendationResponse } from './types';
+import { api } from './services/api';
+import { Movie, PreviousRecommendationResponse } from './types';
+import PromptBar from './components/features/PromptBar';
+import MovieCard from './components/features/MovieCard';
+import HistoryList from './components/features/HistoryList';
 import './App.css';
-
-export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [previousRecomendation, setPreviousRecomendation] = useState<PreviousRecommendationResponse[]>([]);
+  const [history, setHistory] = useState<PreviousRecommendationResponse[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchRecommendations = async () => {
-      try {
-        const response = await fetch(`${API_URL}/api/recommendations`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        const data: PreviousRecommendationResponse[] = await response.json();
-        setPreviousRecomendation(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchRecommendations();
+    loadHistory();
   }, []);
 
-  const handleSubmit = async (preference: string) => {
+  const loadHistory = async () => {
+    try {
+      const data = await api.getHistory();
+      setHistory(data);
+    } catch (err) {
+      console.error('Failed to load history', err);
+    }
+  };
+
+  const handleGenerate = async (preference: string) => {
     setIsLoading(true);
     setError(null);
     setMovies([]);
 
     try {
-      const response = await fetch(`${API_URL}/api/recommend`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ preference }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to get recommendations');
-      }
-
-      const data: RecommendationResponse = await response.json();
-      setMovies(data.movies);
+      const response = await api.getRecommendations(preference);
+      setMovies(response.movies);
+      loadHistory(); // Refresh history
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong');
     } finally {
@@ -59,55 +41,64 @@ function App() {
     }
   };
 
-  const handleDeleteRecommendation = async (id: number) => {
+  const handleDeleteHistory = async (id: number) => {
     try {
-      await fetch(`${API_URL}/api/recommendations/${id}`, {
-        method: 'DELETE',
-      });
-      setPreviousRecomendation((prev) => prev.filter((item) => item.id !== id));
-    } catch (error) {
-      console.error('Failed to delete recommendation:', error);
+      await api.deleteHistoryItem(id);
+      setHistory(prev => prev.filter(item => item.id !== id));
+    } catch (err) {
+      console.error('Failed to delete item', err);
     }
   };
 
   return (
-    <div className="app">
+    <div className="app-container">
+      <div className="background-glow"></div>
 
-      <header className="header">
-        <div className="logo">
-          <span className="logo-icon">🎬</span>
-          <h1>CineMatch AI</h1>
-        </div>
-        <p className="tagline">Discover your next favorite movie with AI-powered recommendations</p>
+      <header className="app-header">
+        <h1 className="app-logo">
+          <span className="logo-text text-gradient">CineMatch AI</span>
+          <span className="logo-spark">✨</span>
+        </h1>
+        <p className="app-subtitle">Discover Your Next Cinematic Experience</p>
       </header>
 
-      <main className="main-content">
-        <div className="content-card">
-          <PreferenceForm onSubmit={handleSubmit} isLoading={isLoading} />
+      <main className="container">
+        <section className="prompt-section">
+          <PromptBar onSubmit={handleGenerate} isLoading={isLoading} />
+        </section>
 
-          {error && (
-            <div className="error-message">
-              <span className="error-icon">⚠️</span>
-              {error}
+        {error && (
+          <div className="error-banner">
+            <span>⚠️ {error}</span>
+          </div>
+        )}
+
+        {movies.length > 0 && (
+          <section className="results-section">
+            <h2 className="section-title">Recommended For You</h2>
+            <div className="movies-grid">
+              {movies.map((movie, index) => (
+                <MovieCard key={`${movie.title}-${index}`} movie={movie} />
+              ))}
             </div>
-          )}
+          </section>
+        )}
 
-          <MovieList movies={movies} />
-        </div>
-        <div className="content-card histCard">
-          <HistoryMovielist recommendations={previousRecomendation} onDelete={handleDeleteRecommendation} />
-        </div>
+        {isLoading && (
+          <div className="loading-state">
+            <div className="scanner"></div>
+            <p>Analyzing cinematic universe...</p>
+          </div>
+        )}
+
+        <section className="history-section">
+          <HistoryList items={history} onDelete={handleDeleteHistory} />
+        </section>
       </main>
 
-      <footer className="footer">
-        <p>Made with ❤️ For Acelucid</p>
-        <div className="footer-contact">
-          <p className="dev-name">Developed by <strong>Ankit Bhandari</strong></p>
-          <p className="contact-info">
-            📞 <a href="tel:+916397098909">6397098909</a> |
-            ✉️ <a href="mailto:bhandarii1398@gmail.com">bhandarii1398@gmail.com</a>
-          </p>
-        </div>
+      <footer className="app-footer">
+        <p>© 2026 CineMatch AI</p>
+        <p className="footer-credits">Crafted with intelligence</p>
       </footer>
     </div>
   );
