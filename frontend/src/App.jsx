@@ -23,7 +23,7 @@ function App() {
     try {
       // Make POST request to backend API
       const response = await fetch(
-        "http://localhost:3001/api/recommendations",
+        "https://movie-recommendation-backend2.onrender.com/api/recommendations",
         {
           method: "POST",
           headers: {
