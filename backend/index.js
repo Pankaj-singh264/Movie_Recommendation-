@@ -49,7 +49,7 @@ const start = async () => {
     try {
         await initDb();
         await fastify.listen({ port: 3001, host: '0.0.0.0' });
-        console.log('Server is running on http://localhost:3001');
+        console.log('Server is runningggg on http://localhost:3001');
     } catch (err) {
         fastify.log.error(err);
         process.exit(1);
